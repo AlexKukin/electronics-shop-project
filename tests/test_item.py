@@ -27,7 +27,7 @@ def test_total_price(item, excepted, request):
 # Тест расчета скидки на 1шт товара
 @pytest.mark.parametrize('item, excepted',
     [("item1", 8000),
-     ("item2", 16000)]# в исходном коде тут было ошибочно 20_000
+     ("item2", 16000)]
 )
 def test_discount(item, excepted, request):
     item = request.getfixturevalue(item)
