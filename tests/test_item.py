@@ -20,6 +20,7 @@ def item2():
      ("item2", 100000)]
 )
 def test_total_price(item, excepted, request):
+    """Тест расчета общей цены за N шт товаров"""
     item = request.getfixturevalue(item)
     assert item.calculate_total_price() == excepted
 
@@ -30,6 +31,7 @@ def test_total_price(item, excepted, request):
      ("item2", 16000)]
 )
 def test_discount(item, excepted, request):
+    """Тест расчет дисконта"""
     item = request.getfixturevalue(item)
     Item.pay_rate = 0.8
     item.apply_discount()
@@ -42,6 +44,7 @@ def test_discount(item, excepted, request):
      'item2']
 )
 def test_fill_all(item, request):
+    """Тест автоматического добавления объекта Item в список Item.all. После инициализации Item"""
     item = request.getfixturevalue(item)
     # Список не пуст
     assert any(Item.all) is True
@@ -50,6 +53,7 @@ def test_fill_all(item, request):
 
 
 def test_instantiate_from_csv():
+    """Тестирование метода instantiate_from_csv чтения списка Items из файла"""
     # это добавление в all должно затереться при вызове instantiate_from_csv, судя по логике описанной в main. hw2.
     # Т.к. 5шт это только в csv файле
     Item("наименование", 1, 2)
@@ -61,6 +65,8 @@ def test_instantiate_from_csv():
 
 
 def test_string_to_number():
+    """Тесты функции string_to_number преоразования строки-числа в целое число.
+    Округялется в меньшую сторону до целого"""
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.9') == 5

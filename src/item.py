@@ -24,7 +24,7 @@ class Item:
         Item.all.append(self)
 
     @classmethod
-    def instantiate_from_csv(cls, file_path):
+    def instantiate_from_csv(cls, file_path: str) -> None:
         """Инициализирует экземпляры класса Item данными из файла src/items.csv"""
         Item.all = []
         file_path = os.path.join(ROOT_PATH, file_path)
@@ -37,16 +37,16 @@ class Item:
                 items.append(Item(name, price, quantity))
 
     @staticmethod
-    def string_to_number(str_num: str):
+    def string_to_number(str_num: str) -> int:
         """Возвращает целую часть число из числа-строки"""
         return int(float(str_num))
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
     @name.setter
-    def name(self, value):
+    def name(self, value) -> None:
         self.__name = value[:10]
 
     def calculate_total_price(self) -> float:
