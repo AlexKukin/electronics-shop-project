@@ -91,5 +91,9 @@ def test_set_name():
     item.name = new_name
     assert item.name == new_name[0: 10]
 
-    # Примечание. Если бы бросал  эксепшн в сеттере при привыешении 10 симвлов, то не получилось бы вернуть строку до 10 символов
+
+def test_item_represent():
+    item = Item("Утюг", 1200, 100)
+    assert repr(item) == "Item('Утюг', 1200, 100)"
+    assert str(item) == 'Утюг'
 
