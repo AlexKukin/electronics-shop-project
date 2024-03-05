@@ -97,3 +97,18 @@ def test_item_represent():
     assert repr(item) == "Item('Утюг', 1200, 100)"
     assert str(item) == 'Утюг'
 
+
+@pytest.mark.parametrize('item',
+    ['item1',
+     'item2']
+)
+def test_add(item, request):
+    """Тест расчет дисконта"""
+    item = request.getfixturevalue(item)
+    item_other = Item("Смартфон", 10000, 20)
+    assert item + item_other == item.quantity + item_other.quantity
+    assert item_other + item == item.quantity + item_other.quantity
+
+    with pytest.raises(ValueError, match=r'Складывать можно только объекты Item и дочерние от них.'):
+        item + 100
+
